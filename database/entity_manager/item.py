@@ -10,10 +10,6 @@ def get_item_by_id(db: Session, item_id: int):
     return db.query(Item).filter(Item.id == item_id).first()
 
 
-def get_item_by_name(db: Session, item_name: int):
-    return db.query(Item).filter(Item.name == item_name).first()
-
-
 def get_items_by_filter(
     db: Session, filters: Filters, skip: int = 0, limit: int = 100
 ):
@@ -25,22 +21,6 @@ def get_items_by_filter(
     return (
         db.query(Item)
         .filter_by(**translated_filters)
-        .offset(skip)
-        .limit(limit)
-        .all()
-    )
-
-
-def get_items(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(Item).offset(skip).limit(limit).all()
-
-
-def get_items_by_owner_id(
-    db: Session, owner_id: int, skip: int = 0, limit: int = 100
-):
-    return (
-        db.query(Item)
-        .filter(Item.owner_id == owner_id)
         .offset(skip)
         .limit(limit)
         .all()

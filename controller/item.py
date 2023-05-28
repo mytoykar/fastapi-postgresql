@@ -28,7 +28,6 @@ def get_items_by_owner(
     query: Optional[PaginationParams] = Depends(pagination_params),
     db: Session = Depends(get_db),
 ):
-    print("query: ", query)
     return item_em.get_items_by_filter(
         db=db, filters=query.filters, skip=query.skip, limit=query.limit
     )
